@@ -16,3 +16,18 @@ FaceRegistration::~FaceRegistration()
 {
     delete ui;
 }
+
+void FaceRegistration::on_loadImgButton_clicked()
+{
+
+}
+
+void FaceRegistration::on_imgRadioButton_toggled(bool checked)
+{
+    ui->loadImgButton->setEnabled(checked);
+}
+
+void FaceRegistration::on_cameraRadioButton_toggled(bool checked)
+{
+    ui->startPauseButton->setEnabled(checked);
+}

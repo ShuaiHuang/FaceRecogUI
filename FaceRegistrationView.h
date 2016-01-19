@@ -15,6 +15,12 @@ public:
     explicit FaceRegistration(QWidget *parent = 0);
     ~FaceRegistration();
 
+private slots:
+    void on_loadImgButton_clicked();
+    void on_imgRadioButton_toggled(bool checked);
+
+    void on_cameraRadioButton_toggled(bool checked);
+
 private:
     Ui::FaceRegistration *ui;
 };
