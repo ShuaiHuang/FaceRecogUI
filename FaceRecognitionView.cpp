@@ -1,6 +1,10 @@
-#include "facerecognition.h"
+#include "FaceRecognitionView.h"
 #include "ui_facerecognition.h"
-#include "faceregistration.h"
+#include "FaceRegistrationView.h"
+
+#include <opencv2/core.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
 
 #include <QMessageBox>
 

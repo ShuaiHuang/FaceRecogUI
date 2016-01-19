@@ -1,5 +1,5 @@
-#ifndef FACEREGISTRATION_H
-#define FACEREGISTRATION_H
+#ifndef FACEREGISTRATIONVIEW_H
+#define FACEREGISTRATIONVIEW_H
 
 #include <QDialog>
 
@@ -19,4 +19,4 @@ private:
     Ui::FaceRegistration *ui;
 };
 
-#endif // FACEREGISTRATION_H
+#endif // FACEREGISTRATIONVIEW_H

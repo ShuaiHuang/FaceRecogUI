@@ -1,5 +1,5 @@
-#ifndef FACERECOGNITION_H
-#define FACERECOGNITION_H
+#ifndef FACERECOGNITIONVIEW_H
+#define FACERECOGNITIONVIEW_H
 
 #include <QMainWindow>
 
@@ -26,4 +26,4 @@ private:
     Ui::FaceRecognition *ui;
 };
 
-#endif // FACERECOGNITION_H
+#endif // FACERECOGNITIONVIEW_H
