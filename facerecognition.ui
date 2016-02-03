@@ -39,7 +39,7 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -82,7 +82,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>31</x>
@@ -145,16 +145,9 @@
      </item>
     </layout>
    </widget>
-   <zorder>graphicsView</zorder>
-   <zorder>textBrowser</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
    <zorder>line</zorder>
-   <zorder>loadVideoButton</zorder>
-   <zorder>preFrameButton</zorder>
-   <zorder>nextFrameButton</zorder>
-   <zorder>comboBox</zorder>
-   <zorder>recogButton</zorder>
-   <zorder>stopRecogButton</zorder>
-   <zorder>horizontalSpacer</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

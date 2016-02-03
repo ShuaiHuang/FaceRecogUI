@@ -14,27 +14,45 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     FaceRegistrationView.cpp \
-    FaceRecognitionView.cpp
+    FaceRecognitionView.cpp \
+    systemctrl.cpp \
+    facerecognitionctrl.cpp \
+    facerecognitionmodel.cpp \
+    faceregistrationctrl.cpp \
+    faceregistrationmodel.cpp
 
 HEADERS  += \
     FaceRegistrationView.h \
-    FaceRecognitionView.h
+    FaceRecognitionView.h \
+    systemctrl.h \
+    facerecognitionctrl.h \
+    facerecognitionmodel.h \
+    faceregistrationctrl.h \
+    faceregistrationmodel.h
 
 FORMS    += facerecognition.ui \
     faceregistration.ui
 
-#INCLUDEPATH += D:/Codes/opencv_build/install/include \
-#                D:/Codes/opencv_build/install/include/opencv \
-#                D:/Codes/opencv_build/install/include/opencv2
+INCLUDEPATH += D:/Codes/opencv_build/install/include \
+                D:/Codes/opencv_build/install/include/opencv \
+                D:/Codes/opencv_build/install/include/opencv2
 
-#LIBS += D:/Codes/opencv_build/install/x64/vc12/lib/opencv_core300d.lib \
-#        D:/Codes/opencv_build/install/x64/vc12/lib/opencv_imgcodecs300d.lib \
-#        D:/Codes/opencv_build/install/x64/vc12/lib/opencv_imgproc300d.lib
+LIBS += D:/Codes/opencv_build/install/x64/vc12/lib/opencv_core300d.lib \
+        D:/Codes/opencv_build/install/x64/vc12/lib/opencv_imgcodecs300d.lib \
+        D:/Codes/opencv_build/install/x64/vc12/lib/opencv_imgproc300d.lib \
+        D:/Codes/opencv_build/install/x64/vc12/lib/opencv_imgproc300d.lib \
+        D:/Codes/opencv_build/install/x64/vc12/lib/opencv_videoio300d.lib \
+        D:/Codes/opencv_build/install/x64/vc12/lib/opencv_objdetect300d.lib \
+        D:/Codes/opencv_build/install/x64/vc12/lib/opencv_face300d.lib \
+        D:/Codes/opencv_build/install/x64/vc12/lib/opencv_tracking300d.lib
 
-INCLUDEPATH += E:/opencv_build/install/include \
-                E:/opencv_build/install/include/opencv \
-                E:/opencv_build/install/include/opencv2
+#INCLUDEPATH += E:/opencv_build/install/include \
+#                E:/opencv_build/install/include/opencv \
+#                E:/opencv_build/install/include/opencv2
 
-LIBS += E:/opencv_build/install/x64/vc12/lib/opencv_core300d.lib \
-        E:/opencv_build/install/x64/vc12/lib/opencv_imgcodecs300d.lib \
-        E:/opencv_build/install/x64/vc12/lib/opencv_imgproc300d.lib
+#LIBS += E:/opencv_build/install/x64/vc12/lib/opencv_core300d.lib \
+#        E:/opencv_build/install/x64/vc12/lib/opencv_imgcodecs300d.lib \
+#        E:/opencv_build/install/x64/vc12/lib/opencv_imgproc300d.lib
+
+RESOURCES += \
+    facerecognitionres.qrc

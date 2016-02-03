@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/data">
+        <file alias="cascadeDetector">data/lbpcascade_frontalface.xml</file>
+        <file alias="facesNumber">data/facesNumber.txt</file>
+        <file alias="optionsData">data/optionsData.txt</file>
+    </qresource>
+</RCC>

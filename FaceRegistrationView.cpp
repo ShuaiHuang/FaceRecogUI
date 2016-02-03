@@ -1,15 +1,12 @@
 #include "FaceRegistrationView.h"
 #include "ui_faceregistration.h"
 
-#include <opencv2/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/imgproc.hpp>
-
 FaceRegistration::FaceRegistration(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FaceRegistration)
 {
     ui->setupUi(this);
+    isCameraPaused = true;
 }
 
 FaceRegistration::~FaceRegistration()
@@ -30,4 +27,22 @@ void FaceRegistration::on_imgRadioButton_toggled(bool checked)
 void FaceRegistration::on_cameraRadioButton_toggled(bool checked)
 {
     ui->startPauseButton->setEnabled(checked);
+    if (!checked)
+    {
+        isCameraPaused = true;
+        ui->startPauseButton->setText("Start");
+    }
+}
+
+void FaceRegistration::on_startPauseButton_clicked()
+{
+    isCameraPaused = !isCameraPaused;
+    if (isCameraPaused)
+    {
+        ui->startPauseButton->setText("Start");
+    }
+    else
+    {
+        ui->startPauseButton->setText("Pause");
+    }
 }
