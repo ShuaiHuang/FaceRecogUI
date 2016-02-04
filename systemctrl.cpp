@@ -17,6 +17,6 @@ void SystemCtrl::cvtMat2QImage(const Mat &_inputImg, QImage &_outputImg)
     else
     {
         _outputImg = QImage((const unsigned char *)_inputImg.data,
-                            _inputImg.cols, _inputImg.rows, QImage::Format_RGB888);
+                            _inputImg.cols, _inputImg.rows, QImage::Format_Grayscale8);
     }
 }

@@ -13,8 +13,8 @@ void FaceRegistrationModel::updateFaceRecognizer(
         int _faceLabel,
         string _faceInfo)
 {
-    faceRecognizerPtr->update(srcImg(faceRects[_faceInd]), _label);
-    faceRecognizerPtr->setLabelInfo(_label, _faceInfo);
+    faceRecognizerPtr->update(srcImg(faceRects[_faceInd]), _faceLabel);
+    faceRecognizerPtr->setLabelInfo(_faceLabel, _faceInfo);
 }
 
 void FaceRegistrationModel::saveFaceRecognizer()
@@ -27,7 +27,8 @@ void FaceRegistrationModel::detectFaces(const Mat &_inputImg, vector<Rect> &_out
     if (!_inputImg.empty())
     {
         _inputImg.copyTo(srcImg);
-        cascadeClassifier.detectMultiScale(srcImg, faceRects, 1.2, 3, 0, Size(40, 40));
+        cvtColor(srcImg, srcImg, CV_BGR2GRAY);
+        cascadeClassifier.detectMultiScale(srcImg, faceRects, 1.2, 3, 0, Size(30, 30));
         _outputRects = faceRects;
     }
 }

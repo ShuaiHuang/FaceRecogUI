@@ -7,6 +7,9 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 
+#include "faceregistrationctrl.h"
+#include "facerecognitionctrl.h"
+
 namespace Ui {
 class FaceRegistration;
 }
@@ -22,13 +25,12 @@ public:
 private slots:
     void on_loadImgButton_clicked();
     void on_imgRadioButton_toggled(bool checked);
-
     void on_cameraRadioButton_toggled(bool checked);
-
     void on_startPauseButton_clicked();
 
 private:
     Ui::FaceRegistration *ui;
+    Ptr<FaceRecognitionCtrl> faceRecognitionPtr;
     bool isCameraPaused;
 };
 

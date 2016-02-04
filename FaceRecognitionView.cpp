@@ -8,7 +8,8 @@ FaceRecognition::FaceRecognition(QWidget *parent) :
     ui(new Ui::FaceRecognition)
 {
     ui->setupUi(this);
-    faceRecognitionCtrl.loadOptions();
+    faceRecognitionCtrlPtr = makePtr<FaceRecognitionCtrl>();
+    faceRecognitionCtrlPtr->loadOptions();
 }
 
 FaceRecognition::~FaceRecognition()
@@ -30,4 +31,9 @@ void FaceRecognition::on_actionRegister_Face_triggered()
 {
     FaceRegistration faceReg(this);
     faceReg.exec();
+}
+
+void FaceRecognition::getFaceRecognitionCtrl(Ptr<FaceRecognitionCtrl> &_faceRecognitionCtrlPtr)
+{
+    _faceRecognitionCtrlPtr = faceRecognitionCtrlPtr;
 }

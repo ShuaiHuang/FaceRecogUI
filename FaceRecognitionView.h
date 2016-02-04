@@ -28,14 +28,12 @@ public:
 
 private slots:
     void on_actionQuit_triggered();
-
     void on_actionAbout_triggered();
-
     void on_actionRegister_Face_triggered();
 
 private:
     Ui::FaceRecognition *ui;
-    FaceRecognitionCtrl faceRecognitionCtrl;
+    Ptr<FaceRecognitionCtrl> faceRecognitionCtrlPtr;
 };
 
 #endif // FACERECOGNITIONVIEW_H

@@ -1,11 +1,14 @@
 #include "FaceRegistrationView.h"
 #include "ui_faceregistration.h"
 
+#include "FaceRecognitionView.h"
+
 FaceRegistration::FaceRegistration(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FaceRegistration)
 {
     ui->setupUi(this);
+
     isCameraPaused = true;
 }
 
