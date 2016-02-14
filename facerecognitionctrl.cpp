@@ -3,32 +3,33 @@
 FaceRecognitionCtrl::FaceRecognitionCtrl()
     : optionsFileName(":/data/optionsData")
 {
+    faceRecognitionModelPtr = make_shared<FaceRecognitionModel>();
     loadOptions();
 }
 
 void FaceRecognitionCtrl::runFaceRecognization()
 {
-    faceRecognitionModel.runFaceRecognition();
+    faceRecognitionModelPtr->runFaceRecognition();
 }
 
 void FaceRecognitionCtrl::getFaceRecognizer(Ptr<FaceRecognizer> _faceRecognizer)
 {
-    faceRecognitionModel.getFaceRecognizer(_faceRecognizer);
+    faceRecognitionModelPtr->getFaceRecognizer(_faceRecognizer);
 }
 
 void FaceRecognitionCtrl::setFaceDetector(int _faceDetectorInd)
 {
-    faceRecognitionModel.setFaceDetector(_faceDetectorInd);
+    faceRecognitionModelPtr->setFaceDetector(_faceDetectorInd);
 }
 
 void FaceRecognitionCtrl::setFaceTracker(int _faceTrackerInd)
 {
-    faceRecognitionModel.setFaceTracker(_faceTrackerInd);
+    faceRecognitionModelPtr->setFaceTracker(_faceTrackerInd);
 }
 
 void FaceRecognitionCtrl::setFaceRecognizer(int _faceRecognizerInd)
 {
-    faceRecognitionModel.setFaceRecognizer(_faceRecognizerInd);
+    faceRecognitionModelPtr->setFaceRecognizer(_faceRecognizerInd);
 }
 
 bool FaceRecognitionCtrl::loadOptions()

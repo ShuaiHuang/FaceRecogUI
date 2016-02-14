@@ -33,18 +33,18 @@ void FaceRegistrationCtrl::detectFaces()
         return;
     }
 
-    faceRegistrationModel.detectFaces(srcImg, faceRects);
+    faceRegistrationModelPtr->detectFaces(srcImg, faceRects);
     drawFaceRects();
 }
 
 void FaceRegistrationCtrl::registerFace(int _faceInd, int _faceLabel, QString _faceInfo)
 {
-    faceRegistrationModel.updateFaceRecognizer(_faceInd, _faceLabel, _faceInfo.toStdString());
+    faceRegistrationModelPtr->updateFaceRecognizer(_faceInd, _faceLabel, _faceInfo.toStdString());
 }
 
 void FaceRegistrationCtrl::saveFaceRecognizer()
 {
-    faceRegistrationModel.saveFaceRecognizer();
+    faceRegistrationModelPtr->saveFaceRecognizer();
 }
 
 void FaceRegistrationCtrl::drawFaceRects()

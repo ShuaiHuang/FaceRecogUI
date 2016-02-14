@@ -3,14 +3,6 @@
 
 #include <QMainWindow>
 
-#include <opencv2/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/videoio.hpp>
-#include <opencv2/objdetect.hpp>
-#include <opencv2/face.hpp>
-#include <opencv2/tracking.hpp>
-
 #include "facerecognitionctrl.h"
 #include "FaceRegistrationView.h"
 
@@ -33,7 +25,8 @@ private slots:
 
 private:
     Ui::FaceRecognition *ui;
-    Ptr<FaceRecognitionCtrl> faceRecognitionCtrlPtr;
+    shared_ptr<FaceRecognitionCtrl> faceRecognitionCtrlPtr;
+    unique_ptr<FaceRegistration> faceRegistrationPtr;
 };
 
 #endif // FACERECOGNITIONVIEW_H

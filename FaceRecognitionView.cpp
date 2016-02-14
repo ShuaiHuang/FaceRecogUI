@@ -5,10 +5,11 @@
 
 FaceRecognition::FaceRecognition(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::FaceRecognition)
+    ui(new Ui::FaceRecognition),
+    faceRegistrationPtr(nullptr)
 {
     ui->setupUi(this);
-    faceRecognitionCtrlPtr = makePtr<FaceRecognitionCtrl>();
+    faceRecognitionCtrlPtr = make_shared<FaceRecognitionCtrl>();
     faceRecognitionCtrlPtr->loadOptions();
 }
 
@@ -29,11 +30,10 @@ void FaceRecognition::on_actionAbout_triggered()
 
 void FaceRecognition::on_actionRegister_Face_triggered()
 {
-    FaceRegistration faceReg(this);
-    faceReg.exec();
-}
-
-void FaceRecognition::getFaceRecognitionCtrl(Ptr<FaceRecognitionCtrl> &_faceRecognitionCtrlPtr)
-{
-    _faceRecognitionCtrlPtr = faceRecognitionCtrlPtr;
+    if (faceRegistrationPtr == nullptr)
+    {
+        faceRegistrationPtr = make_unique<FaceRegistration>(this);
+    }
+    faceRegistrationPtr->setModal(true);
+    faceRegistrationPtr->show();
 }

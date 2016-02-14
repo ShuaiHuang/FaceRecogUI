@@ -1,6 +1,8 @@
 #ifndef FACERECOGNITIONCTRL_H
 #define FACERECOGNITIONCTRL_H
 
+#include <memory>
+
 #include <QFile>
 #include <QFileInfo>
 #include <QString>
@@ -23,7 +25,7 @@ public:
 
 private:
     QString optionsFileName;
-    FaceRecognitionModel faceRecognitionModel;
+    shared_ptr<FaceRecognitionModel> faceRecognitionModelPtr;
 };
 
 #endif // FACERECOGNITIONCTRL_H

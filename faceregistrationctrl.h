@@ -26,8 +26,8 @@ public:
     void saveFaceRecognizer();
 
 private:
-    FaceRegistrationModel faceRegistrationModel;
-    FaceRecognitionCtrl faceRecognitionCtrl;
+    shared_ptr<FaceRegistrationModel> faceRegistrationModelPtr;
+    shared_ptr<FaceRecognitionCtrl> faceRecognitionCtrlPtr;
     Mat srcImg, dstImg;
     vector<Rect> faceRects;
 
