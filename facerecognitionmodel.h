@@ -38,9 +38,9 @@ public:
 
     void getFaceRecognizer(Ptr<FaceRecognizer> _faceRecognizerPtr = Ptr<FaceRecognizer>());
     void runFaceRecognition();
-    void setFaceTracker(int _faceTrackerInd);
-    void setFaceRecognizer(int _faceRecognizerInd);
-    void setFaceDetector(int _faceDetectorInd);
+    void setFaceTrackerIndex(int _faceTrackerInd);
+    void setFaceRecognizerIndex(int _faceRecognizerInd);
+    void setFaceDetectorIndex(int _faceDetectorInd);
 
 private:
     Ptr<Tracker> faceTrackerPtr;

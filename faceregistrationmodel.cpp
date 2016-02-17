@@ -1,8 +1,8 @@
 #include "faceregistrationmodel.h"
 
-FaceRegistrationModel::FaceRegistrationModel(Ptr<FaceRecognizer> _faceRecognizerPtr, string _faceRecognizerFileName)
-    : classifierFileName(":/data/cascadeClassifier"),
-      faceRecognizerFileName(_faceRecognizerFileName),
+FaceRegistrationModel::FaceRegistrationModel(Ptr<FaceRecognizer> _faceRecognizerPtr)
+    : classifierFileName(".\\data\\haarcascade_frontalface_default.xml"),
+      faceRecognizerFileName(":/data/faceRecognizer"),
       faceRecognizerPtr(_faceRecognizerPtr)
 {
     cascadeClassifier.load(classifierFileName);
@@ -28,7 +28,7 @@ void FaceRegistrationModel::detectFaces(const Mat &_inputImg, vector<Rect> &_out
     {
         _inputImg.copyTo(srcImg);
         cvtColor(srcImg, srcImg, CV_BGR2GRAY);
-        cascadeClassifier.detectMultiScale(srcImg, faceRects, 1.2, 3, 0, Size(30, 30));
+        cascadeClassifier.detectMultiScale(srcImg, faceRects, 1.2, 3, 0 | CV_HAAR_SCALE_IMAGE, Size(30, 30));
         _outputRects = faceRects;
     }
 }

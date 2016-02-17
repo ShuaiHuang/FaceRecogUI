@@ -2,6 +2,7 @@
 #define FACERECOGNITIONVIEW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 
 #include "facerecognitionctrl.h"
 #include "FaceRegistrationView.h"
@@ -26,7 +27,10 @@ private slots:
 private:
     Ui::FaceRecognition *ui;
     shared_ptr<FaceRecognitionCtrl> faceRecognitionCtrlPtr;
-    unique_ptr<FaceRegistration> faceRegistrationPtr;
+    shared_ptr<FaceRegistration> faceRegistrationPtr;
+
+signals:
+    void sendFaceRecognitionCtrlPtr(shared_ptr<FaceRecognitionCtrl> _faceRecognitionCtrlPtr);
 };
 
 #endif // FACERECOGNITIONVIEW_H

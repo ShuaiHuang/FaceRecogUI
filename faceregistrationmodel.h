@@ -16,7 +16,7 @@ using namespace face;
 class FaceRegistrationModel
 {
 public:
-    FaceRegistrationModel(Ptr<FaceRecognizer> _faceRecognizer, string _faceRecognizerFileName);
+    FaceRegistrationModel(Ptr<FaceRecognizer> _faceRecognizer);
     void updateFaceRecognizer(int _faceInd, int _faceLabel, string _faceInfo);
     void saveFaceRecognizer();
     void detectFaces(const Mat &_inputImg, vector<Rect> &_outputRects);

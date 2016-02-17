@@ -1,8 +1,6 @@
 #include "FaceRecognitionView.h"
 #include "ui_facerecognition.h"
 
-#include <QMessageBox>
-
 FaceRecognition::FaceRecognition(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FaceRecognition),
@@ -32,8 +30,14 @@ void FaceRecognition::on_actionRegister_Face_triggered()
 {
     if (faceRegistrationPtr == nullptr)
     {
-        faceRegistrationPtr = make_unique<FaceRegistration>(this);
+        faceRegistrationPtr = make_shared<FaceRegistration>(this);
+        faceRegistrationPtr->setModal(true);
+        connect(
+                    this,
+                    &FaceRecognition::sendFaceRecognitionCtrlPtr,
+                    faceRegistrationPtr.get(),
+                    &FaceRegistration::receiveFaceRecognitionCtrlPtr);
     }
-    faceRegistrationPtr->setModal(true);
+    emit sendFaceRecognitionCtrlPtr(faceRecognitionCtrlPtr);
     faceRegistrationPtr->show();
 }

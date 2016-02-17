@@ -6,17 +6,17 @@ FaceRecognitionModel::FaceRecognitionModel(
         const int _faceRecognizerInd
         )
 {
-    setFaceDetector(_faceDetectorInd);
-    setFaceTracker(_faceTrackerInd);
-    setFaceRecognizer(_faceRecognizerInd);
+    setFaceDetectorIndex(_faceDetectorInd);
+    setFaceTrackerIndex(_faceTrackerInd);
+    setFaceRecognizerIndex(_faceRecognizerInd);
 }
 
-void FaceRecognitionModel::setFaceDetector(int _faceDetectorInd)
+void FaceRecognitionModel::setFaceDetectorIndex(int _faceDetectorInd)
 {
 
 }
 
-void FaceRecognitionModel::setFaceTracker(int _faceTrackerInd)
+void FaceRecognitionModel::setFaceTrackerIndex(int _faceTrackerInd)
 {
     string trackerModelName;
     switch (_faceTrackerInd)
@@ -40,7 +40,7 @@ void FaceRecognitionModel::setFaceTracker(int _faceTrackerInd)
     faceTrackerPtr = Tracker::create(trackerModelName);
 }
 
-void FaceRecognitionModel::setFaceRecognizer(int _faceRecognizerInd)
+void FaceRecognitionModel::setFaceRecognizerIndex(int _faceRecognizerInd)
 {
     switch (_faceRecognizerInd)
     {

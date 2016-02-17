@@ -14,22 +14,22 @@ TEMPLATE = app
 CONFIG += c++11
 
 SOURCES += main.cpp\
-    FaceRegistrationView.cpp \
     FaceRecognitionView.cpp \
     systemctrl.cpp \
     facerecognitionctrl.cpp \
     facerecognitionmodel.cpp \
     faceregistrationctrl.cpp \
-    faceregistrationmodel.cpp
+    faceregistrationmodel.cpp \
+    FaceRegistrationView.cpp
 
 HEADERS  += \
-    FaceRegistrationView.h \
     FaceRecognitionView.h \
     systemctrl.h \
     facerecognitionctrl.h \
     facerecognitionmodel.h \
     faceregistrationctrl.h \
-    faceregistrationmodel.h
+    faceregistrationmodel.h \
+    FaceRegistrationView.h
 
 FORMS    += facerecognition.ui \
     faceregistration.ui

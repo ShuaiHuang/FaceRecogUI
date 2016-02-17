@@ -6,7 +6,6 @@
 using namespace std;
 
 #include "systemctrl.h"
-#include "faceregistrationctrl.h"
 #include "faceregistrationmodel.h"
 #include "facerecognitionctrl.h"
 
@@ -18,16 +17,15 @@ using namespace std;
 class FaceRegistrationCtrl : public SystemCtrl
 {
 public:
-    FaceRegistrationCtrl();
+    FaceRegistrationCtrl(Ptr<FaceRecognizer> &_faceRecognizer);
 
     void loadImage(int _imageSourceIndicator, QString _filePath);
-    void detectFaces();
+    void detectFaces(QImage &_dstImg);
     void registerFace(int _faceInd, int _faceLabel, QString _faceInfo);
     void saveFaceRecognizer();
 
 private:
     shared_ptr<FaceRegistrationModel> faceRegistrationModelPtr;
-    shared_ptr<FaceRecognitionCtrl> faceRecognitionCtrlPtr;
     Mat srcImg, dstImg;
     vector<Rect> faceRects;
 

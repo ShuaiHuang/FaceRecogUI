@@ -2,6 +2,9 @@
 #define FACEREGISTRATIONVIEW_H
 
 #include <QDialog>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QGraphicsPixmapItem>
 
 #include "faceregistrationctrl.h"
 #include "facerecognitionctrl.h"
@@ -24,9 +27,13 @@ private slots:
     void on_cameraRadioButton_toggled(bool checked);
     void on_startPauseButton_clicked();
 
+public slots:
+    void receiveFaceRecognitionCtrlPtr(shared_ptr<FaceRecognitionCtrl> _faceRecognitionCtrlPtr);
+
 private:
     Ui::FaceRegistration *ui;
-    Ptr<FaceRecognitionCtrl> faceRecognitionPtr;
+    shared_ptr<FaceRecognitionCtrl> faceRecognitionCtrlPtr;
+    shared_ptr<FaceRegistrationCtrl> faceRegistrationCtrlPtr;
     bool isCameraPaused;
 };
 

@@ -1,8 +1,8 @@
 #include "faceregistrationctrl.h"
 
-FaceRegistrationCtrl::FaceRegistrationCtrl()
+FaceRegistrationCtrl::FaceRegistrationCtrl(Ptr<FaceRecognizer> &_faceRecognizer)
 {
-
+    faceRegistrationModelPtr = make_shared<FaceRegistrationModel>(_faceRecognizer);
 }
 
 void FaceRegistrationCtrl::loadImage(int _imageSourceIndicator, QString _filePath)
@@ -26,7 +26,7 @@ void FaceRegistrationCtrl::loadImage(int _imageSourceIndicator, QString _filePat
     }
 }
 
-void FaceRegistrationCtrl::detectFaces()
+void FaceRegistrationCtrl::detectFaces(QImage &_dstImg)
 {
     if (srcImg.empty())
     {
@@ -35,6 +35,7 @@ void FaceRegistrationCtrl::detectFaces()
 
     faceRegistrationModelPtr->detectFaces(srcImg, faceRects);
     drawFaceRects();
+    cvtMat2QImage(dstImg, _dstImg);
 }
 
 void FaceRegistrationCtrl::registerFace(int _faceInd, int _faceLabel, QString _faceInfo)

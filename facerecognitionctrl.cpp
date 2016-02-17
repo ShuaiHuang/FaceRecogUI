@@ -19,17 +19,17 @@ void FaceRecognitionCtrl::getFaceRecognizer(Ptr<FaceRecognizer> _faceRecognizer)
 
 void FaceRecognitionCtrl::setFaceDetector(int _faceDetectorInd)
 {
-    faceRecognitionModelPtr->setFaceDetector(_faceDetectorInd);
+    faceRecognitionModelPtr->setFaceDetectorIndex(_faceDetectorInd);
 }
 
 void FaceRecognitionCtrl::setFaceTracker(int _faceTrackerInd)
 {
-    faceRecognitionModelPtr->setFaceTracker(_faceTrackerInd);
+    faceRecognitionModelPtr->setFaceTrackerIndex(_faceTrackerInd);
 }
 
 void FaceRecognitionCtrl::setFaceRecognizer(int _faceRecognizerInd)
 {
-    faceRecognitionModelPtr->setFaceRecognizer(_faceRecognizerInd);
+    faceRecognitionModelPtr->setFaceRecognizerIndex(_faceRecognizerInd);
 }
 
 bool FaceRecognitionCtrl::loadOptions()

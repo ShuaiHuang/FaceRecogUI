@@ -25,25 +25,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QGraphicsView" name="graphicsView">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>340</width>
-     <height>260</height>
-    </rect>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAsNeeded</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAsNeeded</enum>
-   </property>
-   <property name="sizeAdjustPolicy">
-    <enum>QAbstractScrollArea::AdjustIgnored</enum>
-   </property>
-  </widget>
   <widget class="QLabel" name="sourceLabel">
    <property name="geometry">
     <rect>
@@ -249,6 +230,22 @@
      <width>151</width>
      <height>20</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="dstImageView">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>340</width>
+     <height>260</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
