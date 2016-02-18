@@ -36,7 +36,7 @@ public:
             const int _faceTrackerInd = NOT_DEFINED,
             const int _faceRecognizerInd = NOT_DEFINED);
 
-    void getFaceRecognizer(Ptr<FaceRecognizer> _faceRecognizerPtr = Ptr<FaceRecognizer>());
+    void getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognizerPtr);
     void runFaceRecognition();
     void setFaceTrackerIndex(int _faceTrackerInd);
     void setFaceRecognizerIndex(int _faceRecognizerInd);

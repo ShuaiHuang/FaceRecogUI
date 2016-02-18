@@ -54,11 +54,12 @@ void FaceRecognitionModel::setFaceRecognizerIndex(int _faceRecognizerInd)
         faceRecognizerPtr = createLBPHFaceRecognizer();
         break;
     default:
+        faceRecognizerPtr = createLBPHFaceRecognizer();
         break;
     }
 }
 
-void FaceRecognitionModel::getFaceRecognizer(Ptr<FaceRecognizer> _faceRecognizerPtr)
+void FaceRecognitionModel::getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognizerPtr)
 {
     _faceRecognizerPtr = faceRecognizerPtr;
 }

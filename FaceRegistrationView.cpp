@@ -25,11 +25,24 @@ void FaceRegistration::on_loadImgButton_clicked()
         faceRegistrationCtrlPtr->loadImage(IMAGE_FROM_FILE, imageFile);
         QImage dstImg;
         faceRegistrationCtrlPtr->detectFaces(dstImg);
-        if (dstImg.width() > 340)
-        {
-            dstImg = dstImg.scaled(340, 260, Qt::KeepAspectRatio);
-        }
+        dstImg = dstImg.scaled(340, 260, Qt::KeepAspectRatio);
         ui->dstImageView->setPixmap(QPixmap::fromImage(dstImg));
+
+        ui->faceIndComboBox->setEnabled(true);
+        const int faceRectsNum = faceRegistrationCtrlPtr->getFaceRectsNum();
+        for (int curFaceInd = 0; curFaceInd < faceRectsNum; curFaceInd++)
+        {
+            ui->faceIndComboBox->addItem(QString::number(curFaceInd));
+        }
+
+        ui->faceLabelComboBox->setEnabled(true);
+        for (int curLabelInd = 0; curLabelInd < 10; curLabelInd++)
+        {
+            ui->faceLabelComboBox->addItem(QString::number(curLabelInd));
+        }
+
+        ui->nameLineEdit->setEnabled(true);
+        ui->regButton->setEnabled(true);
     }
 }
 
@@ -67,4 +80,25 @@ void FaceRegistration::receiveFaceRecognitionCtrlPtr(shared_ptr<FaceRecognitionC
     Ptr<FaceRecognizer> faceRecognizerPtr;
     faceRecognitionCtrlPtr->getFaceRecognizer(faceRecognizerPtr);
     faceRegistrationCtrlPtr = make_shared<FaceRegistrationCtrl>(faceRecognizerPtr);
+}
+
+void FaceRegistration::on_regButton_clicked()
+{
+    int faceInd = ui->faceIndComboBox->currentIndex();
+    int faceLabel = ui->faceLabelComboBox->currentIndex();
+    QString faceInfo = ui->nameLineEdit->text();
+    faceRegistrationCtrlPtr->registerFace(faceInd, faceLabel++, faceInfo);
+
+    ui->faceIndComboBox->clear();
+    ui->faceIndComboBox->setEnabled(false);
+    ui->faceLabelComboBox->clear();
+    ui->faceLabelComboBox->setEnabled(false);
+    ui->nameLineEdit->clear();
+    ui->nameLineEdit->setEnabled(false);
+    ui->regButton->setEnabled(false);
+}
+
+void FaceRegistration::on_FaceRegistration_rejected()
+{
+    faceRegistrationCtrlPtr->saveFaceRecognizer();
 }

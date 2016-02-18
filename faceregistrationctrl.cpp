@@ -69,3 +69,8 @@ void FaceRegistrationCtrl::drawFaceRects()
                     3);
     }
 }
+
+int FaceRegistrationCtrl::getFaceRectsNum()
+{
+    return faceRects.size();
+}

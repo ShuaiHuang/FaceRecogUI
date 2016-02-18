@@ -12,7 +12,7 @@ void FaceRecognitionCtrl::runFaceRecognization()
     faceRecognitionModelPtr->runFaceRecognition();
 }
 
-void FaceRecognitionCtrl::getFaceRecognizer(Ptr<FaceRecognizer> _faceRecognizer)
+void FaceRecognitionCtrl::getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognizer)
 {
     faceRecognitionModelPtr->getFaceRecognizer(_faceRecognizer);
 }

@@ -27,6 +27,10 @@ private slots:
     void on_cameraRadioButton_toggled(bool checked);
     void on_startPauseButton_clicked();
 
+    void on_regButton_clicked();
+
+    void on_FaceRegistration_rejected();
+
 public slots:
     void receiveFaceRecognitionCtrlPtr(shared_ptr<FaceRecognitionCtrl> _faceRecognitionCtrlPtr);
 

@@ -2,7 +2,7 @@
 
 FaceRegistrationModel::FaceRegistrationModel(Ptr<FaceRecognizer> _faceRecognizerPtr)
     : classifierFileName(".\\data\\haarcascade_frontalface_default.xml"),
-      faceRecognizerFileName(":/data/faceRecognizer"),
+      faceRecognizerFileName(".\\data\\face_recognizer.xml"),
       faceRecognizerPtr(_faceRecognizerPtr)
 {
     cascadeClassifier.load(classifierFileName);
@@ -13,8 +13,13 @@ void FaceRegistrationModel::updateFaceRecognizer(
         int _faceLabel,
         string _faceInfo)
 {
-    faceRecognizerPtr->update(srcImg(faceRects[_faceInd]), _faceLabel);
-    faceRecognizerPtr->setLabelInfo(_faceLabel, _faceInfo);
+    vector<Mat> faces = {srcImg(faceRects[_faceInd])};
+    vector<int> labels = {_faceLabel};
+    faceRecognizerPtr->update(faces, labels);
+    if (!_faceInfo.empty())
+    {
+        faceRecognizerPtr->setLabelInfo(_faceLabel, _faceInfo);
+    }
 }
 
 void FaceRegistrationModel::saveFaceRecognizer()

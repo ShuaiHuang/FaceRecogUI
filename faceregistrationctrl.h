@@ -23,6 +23,7 @@ public:
     void detectFaces(QImage &_dstImg);
     void registerFace(int _faceInd, int _faceLabel, QString _faceInfo);
     void saveFaceRecognizer();
+    int getFaceRectsNum();
 
 private:
     shared_ptr<FaceRegistrationModel> faceRegistrationModelPtr;

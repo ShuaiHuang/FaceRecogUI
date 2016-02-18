@@ -16,7 +16,7 @@ class FaceRecognitionCtrl : public SystemCtrl
 public:
     FaceRecognitionCtrl();
     void runFaceRecognization();
-    void getFaceRecognizer(Ptr<FaceRecognizer> _faceRecognizer = Ptr<FaceRecognizer>());
+    void getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognizer);
     void setFaceDetector(int _faceDetectorInd);
     void setFaceTracker(int _faceTrackerInd);
     void setFaceRecognizer(int _faceRecognizerInd);
