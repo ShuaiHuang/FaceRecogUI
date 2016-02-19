@@ -96,9 +96,10 @@ void FaceRegistration::on_regButton_clicked()
     ui->nameLineEdit->clear();
     ui->nameLineEdit->setEnabled(false);
     ui->regButton->setEnabled(false);
+    ui->dstImageView->clear();
 }
 
 void FaceRegistration::on_FaceRegistration_rejected()
 {
-    faceRegistrationCtrlPtr->saveFaceRecognizer();
+    faceRegistrationCtrlPtr->updateFaceRecognizer();
 }

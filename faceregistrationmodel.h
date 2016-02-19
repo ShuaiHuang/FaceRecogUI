@@ -17,7 +17,7 @@ class FaceRegistrationModel
 {
 public:
     FaceRegistrationModel(Ptr<FaceRecognizer> _faceRecognizer);
-    void updateFaceRecognizer(int _faceInd, int _faceLabel, string _faceInfo);
+    void updateFaceRecognizer(vector<Mat> &_faceImgVec, vector<int> &_faceLabelVec, vector<string> _faceInfoVec);
     void saveFaceRecognizer();
     void detectFaces(const Mat &_inputImg, vector<Rect> &_outputRects);
 
@@ -26,7 +26,6 @@ private:
     Ptr<FaceRecognizer> faceRecognizerPtr;
     string classifierFileName;
     string faceRecognizerFileName;
-    int facesNumber;
     Mat srcImg;
     vector<Rect> faceRects;
 };

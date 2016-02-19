@@ -28,45 +28,46 @@ void FaceRegistrationCtrl::loadImage(int _imageSourceIndicator, QString _filePat
 
 void FaceRegistrationCtrl::detectFaces(QImage &_dstImg)
 {
-    if (srcImg.empty())
+    if (!srcImg.empty())
     {
-        return;
+        faceRegistrationModelPtr->detectFaces(srcImg, faceRects);
+        drawFaceRects();
+        cvtMat2QImage(dstImg, _dstImg);
     }
-
-    faceRegistrationModelPtr->detectFaces(srcImg, faceRects);
-    drawFaceRects();
-    cvtMat2QImage(dstImg, _dstImg);
 }
 
 void FaceRegistrationCtrl::registerFace(int _faceInd, int _faceLabel, QString _faceInfo)
 {
-    faceRegistrationModelPtr->updateFaceRecognizer(_faceInd, _faceLabel, _faceInfo.toStdString());
+    Mat grayFaceImg;
+    cvtColor(srcImg(faceRects[_faceInd]), grayFaceImg, COLOR_BGR2GRAY);
+    faceImgVec.push_back(grayFaceImg);
+    faceLabelVec.push_back(_faceLabel);
+    faceInfoVec.push_back(_faceInfo.toStdString());
 }
 
-void FaceRegistrationCtrl::saveFaceRecognizer()
+void FaceRegistrationCtrl::updateFaceRecognizer()
 {
+    faceRegistrationModelPtr->updateFaceRecognizer(faceImgVec, faceLabelVec, faceInfoVec);
     faceRegistrationModelPtr->saveFaceRecognizer();
 }
 
 void FaceRegistrationCtrl::drawFaceRects()
 {
-    if (dstImg.empty() || faceRects.empty())
+    if (!dstImg.empty() && !faceRects.empty())
     {
-        return;
-    }
-
-    const int rectsNum = faceRects.size();
-    for (int curInd = 0; curInd < rectsNum; curInd++)
-    {
-        rectangle(dstImg, faceRects[curInd], Scalar(0, 255, 0), 3);
-        putText(
-                    dstImg,
-                    to_string(curInd),
-                    Point(faceRects[curInd].x, faceRects[curInd].y),
-                    FONT_HERSHEY_SIMPLEX,
-                    1.0,
-                    Scalar(0, 255, 0),
-                    3);
+        const int rectsNum = faceRects.size();
+        for (int curInd = 0; curInd < rectsNum; curInd++)
+        {
+            rectangle(dstImg, faceRects[curInd], Scalar(0, 255, 0), 3);
+            putText(
+                        dstImg,
+                        to_string(curInd),
+                        Point(faceRects[curInd].x, faceRects[curInd].y),
+                        FONT_HERSHEY_SIMPLEX,
+                        1.0,
+                        Scalar(0, 255, 0),
+                        3);
+        }
     }
 }
 

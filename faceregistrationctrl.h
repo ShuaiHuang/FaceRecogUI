@@ -22,13 +22,16 @@ public:
     void loadImage(int _imageSourceIndicator, QString _filePath);
     void detectFaces(QImage &_dstImg);
     void registerFace(int _faceInd, int _faceLabel, QString _faceInfo);
-    void saveFaceRecognizer();
+    void updateFaceRecognizer();
     int getFaceRectsNum();
 
 private:
     shared_ptr<FaceRegistrationModel> faceRegistrationModelPtr;
     Mat srcImg, dstImg;
     vector<Rect> faceRects;
+    vector<Mat> faceImgVec;
+    vector<int> faceLabelVec;
+    vector<string> faceInfoVec;
 
     void drawFaceRects();
 };

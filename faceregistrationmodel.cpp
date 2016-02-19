@@ -8,17 +8,18 @@ FaceRegistrationModel::FaceRegistrationModel(Ptr<FaceRecognizer> _faceRecognizer
     cascadeClassifier.load(classifierFileName);
 }
 
-void FaceRegistrationModel::updateFaceRecognizer(
-        int _faceInd,
-        int _faceLabel,
-        string _faceInfo)
+void FaceRegistrationModel::updateFaceRecognizer(vector<Mat> &_faceImgVec,
+        vector<int> &_faceLabelVec,
+        vector<string> _faceInfoVec)
 {
-    vector<Mat> faces = {srcImg(faceRects[_faceInd])};
-    vector<int> labels = {_faceLabel};
-    faceRecognizerPtr->update(faces, labels);
-    if (!_faceInfo.empty())
+    faceRecognizerPtr->update(_faceImgVec, _faceLabelVec);
+    const int faceRegNum = _faceImgVec.size();
+    for (int curFaceInd = 0; curFaceInd < faceRegNum; curFaceInd++)
     {
-        faceRecognizerPtr->setLabelInfo(_faceLabel, _faceInfo);
+        if (_faceInfoVec[curFaceInd] != "")
+        {
+            faceRecognizerPtr->setLabelInfo(_faceLabelVec[curFaceInd], _faceInfoVec[curFaceInd]);
+        }
     }
 }
 
