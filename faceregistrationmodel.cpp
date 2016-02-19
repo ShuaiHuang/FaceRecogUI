@@ -12,7 +12,7 @@ void FaceRegistrationModel::updateFaceRecognizer(vector<Mat> &_faceImgVec,
         vector<int> &_faceLabelVec,
         vector<string> _faceInfoVec)
 {
-    faceRecognizerPtr->update(_faceImgVec, _faceLabelVec);
+    faceRecognizerPtr->train(_faceImgVec, _faceLabelVec);
     const int faceRegNum = _faceImgVec.size();
     for (int curFaceInd = 0; curFaceInd < faceRegNum; curFaceInd++)
     {
