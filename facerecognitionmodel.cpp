@@ -5,6 +5,7 @@ FaceRecognitionModel::FaceRecognitionModel(
         const int _faceTrackerInd,
         const int _faceRecognizerInd
         )
+    : cascadeDetectorFile(".\\data\\haarcascade_frontalface_default.xml")
 {
     setFaceDetectorIndex(_faceDetectorInd);
     setFaceTrackerIndex(_faceTrackerInd);
@@ -13,6 +14,14 @@ FaceRecognitionModel::FaceRecognitionModel(
 
 void FaceRecognitionModel::setFaceDetectorIndex(int _faceDetectorInd)
 {
+    switch (_faceDetectorInd)
+    {
+    case DETECTOR_CASCADE:
+        faceDetectorPtr = makePtr<CascadeDetector>(cascadeDetectorFile);
+        break;
+    default:
+        faceDetectorPtr = makePtr<CascadeDetector>(cascadeDetectorFile);
+    }
 
 }
 
@@ -35,7 +44,6 @@ void FaceRecognitionModel::setFaceTrackerIndex(int _faceTrackerInd)
         break;
     default:
         trackerModelName = "TLD";
-        break;
     }
     faceTrackerPtr = Tracker::create(trackerModelName);
 }
@@ -55,7 +63,6 @@ void FaceRecognitionModel::setFaceRecognizerIndex(int _faceRecognizerInd)
         break;
     default:
         faceRecognizerPtr = createLBPHFaceRecognizer();
-        break;
     }
 }
 
@@ -72,4 +79,28 @@ void FaceRecognitionModel::runFaceRecognition()
 void FaceRecognitionModel::loadVideo(string _videoFile)
 {
     videoCapture.open(_videoFile);
+}
+
+bool FaceRecognitionModel::getVideoCaptureNextFrame()
+{
+    videoCapture >> srcImg;
+    if (!srcImg.empty())
+    {
+        srcImg.copyTo(dstImg);
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void FaceRecognitionModel::runFaceDetection(Mat &_dstImg, int &_facesNum)
+{
+    if (!dstImg.empty())
+    {
+        faceDetectorPtr->runDetection(srcImg, faceRectVec);
+        faceDetectorPtr->visualizeFaceRects(dstImg);
+        _dstImg = dstImg;
+        _facesNum = faceRectVec.size();
+    }
 }

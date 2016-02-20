@@ -17,12 +17,14 @@ public:
     FaceRecognitionCtrl();
     void runFaceRecognization();
     void getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognizer);
-    void setFaceDetector(int _faceDetectorInd);
-    void setFaceTracker(int _faceTrackerInd);
-    void setFaceRecognizer(int _faceRecognizerInd);
+    void setFaceDetectorIndex(int _faceDetectorInd);
+    void setFaceTrackerIndex(int _faceTrackerInd);
+    void setFaceRecognizerIndex(int _faceRecognizerInd);
     bool loadOptions();
     bool saveOptions(int _faceDetectorInd, int _faceTrackerInd, int _faceRecognizerInd);
     void loadVideo(QString _videoFile);
+    bool getVideoCaptureNextFrame();
+    void runFaceDetection(QImage &_dstImg, int &_facesNum);
 
 private:
     QString optionsFileName;

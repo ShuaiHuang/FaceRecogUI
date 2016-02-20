@@ -53,5 +53,33 @@ void FaceRecognition::on_loadVideoButton_clicked()
     if (!videoFile.isEmpty())
     {
         faceRecognitionCtrlPtr->loadVideo(videoFile);
+        emit ui->nextFrameButton->clicked();
+
+        ui->nextFrameButton->setEnabled(true);
+        ui->faceIndComboBox->setEnabled(true);
+        ui->recogButton->setEnabled(true);
+    }
+}
+
+void FaceRecognition::on_nextFrameButton_clicked()
+{
+    if (faceRecognitionCtrlPtr->getVideoCaptureNextFrame())
+    {
+        QImage dstImg;
+        int facesNum;
+        faceRecognitionCtrlPtr->runFaceDetection(dstImg, facesNum);
+
+        dstImg = dstImg.scaled(340, 260, Qt::KeepAspectRatio);
+        ui->videoDisplayLabel->setPixmap(QPixmap::fromImage(dstImg));
+
+        ui->faceIndComboBox->clear();
+        for (int curFaceInd = 0; curFaceInd < facesNum; curFaceInd++)
+        {
+            ui->faceIndComboBox->addItem(QString::number(curFaceInd));
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this, "Warning", "Video finished.", QMessageBox::Ok, QMessageBox::NoButton);
     }
 }

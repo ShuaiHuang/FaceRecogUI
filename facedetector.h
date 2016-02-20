@@ -15,6 +15,7 @@ public:
     FaceDetector();
     virtual ~FaceDetector();
     virtual void runDetection(Mat &_inputImg, vector<Rect> &_faceRects) = 0;
+    void visualizeFaceRects(Mat &_outputImg);
 
 protected:
     Mat srcImg, dstImg;

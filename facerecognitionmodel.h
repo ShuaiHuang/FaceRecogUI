@@ -1,6 +1,7 @@
 #ifndef FACERECOGNITIONMODEL_H
 #define FACERECOGNITIONMODEL_H
 
+#include <vector>
 #include <string>
 using namespace std;
 
@@ -12,6 +13,9 @@ using namespace std;
 
 using namespace cv;
 using namespace face;
+
+#include "facedetector.h"
+#include "cascadedetector.h"
 
 #define TRACKER_TLD 0
 #define TRACKER_MIL 1
@@ -42,11 +46,17 @@ public:
     void setFaceRecognizerIndex(int _faceRecognizerInd);
     void setFaceDetectorIndex(int _faceDetectorInd);
     void loadVideo(string _videoFile);
+    bool getVideoCaptureNextFrame();
+    void runFaceDetection(Mat &_dstImg, int &_facesNum);
 
 private:
+    const string cascadeDetectorFile;
+    Ptr<FaceDetector> faceDetectorPtr;
     Ptr<Tracker> faceTrackerPtr;
     Ptr<FaceRecognizer> faceRecognizerPtr;
     VideoCapture videoCapture;
+    Mat srcImg, dstImg;
+    vector<Rect> faceRectVec;
 };
 
 #endif // FACERECOGNITIONMODEL_H

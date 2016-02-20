@@ -17,17 +17,17 @@ void FaceRecognitionCtrl::getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognizer
     faceRecognitionModelPtr->getFaceRecognizer(_faceRecognizer);
 }
 
-void FaceRecognitionCtrl::setFaceDetector(int _faceDetectorInd)
+void FaceRecognitionCtrl::setFaceDetectorIndex(int _faceDetectorInd)
 {
     faceRecognitionModelPtr->setFaceDetectorIndex(_faceDetectorInd);
 }
 
-void FaceRecognitionCtrl::setFaceTracker(int _faceTrackerInd)
+void FaceRecognitionCtrl::setFaceTrackerIndex(int _faceTrackerInd)
 {
     faceRecognitionModelPtr->setFaceTrackerIndex(_faceTrackerInd);
 }
 
-void FaceRecognitionCtrl::setFaceRecognizer(int _faceRecognizerInd)
+void FaceRecognitionCtrl::setFaceRecognizerIndex(int _faceRecognizerInd)
 {
     faceRecognitionModelPtr->setFaceRecognizerIndex(_faceRecognizerInd);
 }
@@ -45,9 +45,9 @@ bool FaceRecognitionCtrl::loadOptions()
         }
         QTextStream textStream(&optionsFile);
         textStream >> faceDetectorInd >> faceTrackerInd >> faceRecognizerInd;
-        setFaceDetector(faceDetectorInd);
-        setFaceTracker(faceTrackerInd);
-        setFaceRecognizer(faceRecognizerInd);
+        setFaceDetectorIndex(faceDetectorInd);
+        setFaceTrackerIndex(faceTrackerInd);
+        setFaceRecognizerIndex(faceRecognizerInd);
         return true;
     }
     else
@@ -82,4 +82,16 @@ bool FaceRecognitionCtrl::saveOptions(int _faceDetectorInd, int _faceTrackerInd,
 void FaceRecognitionCtrl::loadVideo(QString _videoFile)
 {
     faceRecognitionModelPtr->loadVideo(_videoFile.toStdString());
+}
+
+bool FaceRecognitionCtrl::getVideoCaptureNextFrame()
+{
+    return faceRecognitionModelPtr->getVideoCaptureNextFrame();
+}
+
+void FaceRecognitionCtrl::runFaceDetection(QImage &_dstImg, int &_facesNum)
+{
+    Mat dstImg;
+    faceRecognitionModelPtr->runFaceDetection(dstImg, _facesNum);
+    cvtMat2QImage(dstImg, _dstImg);
 }
