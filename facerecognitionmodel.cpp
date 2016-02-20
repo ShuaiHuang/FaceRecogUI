@@ -46,7 +46,7 @@ void FaceRecognitionModel::setFaceTrackerIndex(int _faceTrackerInd)
         trackerModelName = "MEDIANFLOW";
         break;
     default:
-        trackerModelName = "TLD";
+        trackerModelName = "MIL";
     }
     faceTrackerPtr = Tracker::create(trackerModelName);
 }
@@ -74,9 +74,21 @@ void FaceRecognitionModel::getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognize
     _faceRecognizerPtr = faceRecognizerPtr;
 }
 
-void FaceRecognitionModel::runFaceRecognition()
+void FaceRecognitionModel::runFaceRecognition(Mat &_dstImg, string &_faceInfo)
 {
+    vector<Rect> detectedFaceRectVec;
+    Rect2d trackedFaceRect;
 
+    faceDetectorPtr->runDetection(srcImg, detectedFaceRectVec);
+    faceTrackerPtr->update(srcImg, trackedFaceRect);
+    integratorPtr->runIntegration(srcImg, detectedFaceRectVec, trackedFaceRect, curIntegratedRect);
+    if (curIntegratedRect.area())
+    {
+        recognizeFace(srcImg, curIntegratedRect, _faceInfo, faceRecognizerPtr, frontalFaceDetectorPtr);
+        rectangle(dstImg, curIntegratedRect, Scalar(0, 0, 255), 5);
+    }
+    _dstImg = dstImg;
+    prevIntegratedRect = curIntegratedRect;
 }
 
 void FaceRecognitionModel::loadVideo(string _videoFile)
@@ -119,4 +131,44 @@ bool FaceRecognitionModel::initializeTracker(const int &_selectedFaceInd)
     {
         return faceTrackerPtr->init(srcImg, faceRectVec[_selectedFaceInd]);
     }
+}
+
+void FaceRecognitionModel::recognizeFace(Mat &_srcFrame,
+    Rect _faceRect,
+    string &_outputName,
+    Ptr<FaceRecognizer> &_faceRecognizer,
+    Ptr<FaceDetector> &_faceDetector)
+{
+    Rect largeFaceRect = enlargeFaceRect(_srcFrame, _faceRect);
+    Mat facePatch = _srcFrame(largeFaceRect);
+    vector<Rect> faceRects;
+    _faceDetector->runDetection(facePatch, faceRects);
+    if (!faceRects.empty())
+    {
+        const int faceNum = faceRects.size();
+        int maxAreaInd = 0, maxArea = faceRects[0].area();
+        for (int curInd = 1; curInd < faceNum; curInd++)
+        {
+            int curArea = faceRects[curInd].area();
+            if (curArea > maxArea)
+            {
+                maxAreaInd = curInd;
+                maxArea = curArea;
+            }
+        }
+        Mat frontalFace = facePatch(faceRects[maxAreaInd]);
+        cvtColor(frontalFace, frontalFace, CV_BGR2GRAY);
+        int label = _faceRecognizer->predict(frontalFace);
+        _outputName = _faceRecognizer->getLabelInfo(label);
+    }
+}
+
+Rect FaceRecognitionModel::enlargeFaceRect(Mat &_srcFrame, Rect _faceRect)
+{
+    Rect retFaceRect;
+    retFaceRect.x = max(0.0, _faceRect.x - 0.5 * _faceRect.width);
+    retFaceRect.y = max(0.0, _faceRect.y - 0.5 * _faceRect.height);
+    retFaceRect.height = min(double(_srcFrame.rows - retFaceRect.x), 2.0 * _faceRect.height);
+    retFaceRect.width = min(double(_srcFrame.cols - retFaceRect.y), 2.0 * _faceRect.width);
+    return retFaceRect;
 }

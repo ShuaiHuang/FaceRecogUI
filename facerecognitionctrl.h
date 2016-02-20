@@ -15,7 +15,6 @@ class FaceRecognitionCtrl : public SystemCtrl
 {
 public:
     FaceRecognitionCtrl();
-    void runFaceRecognization();
     void getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognizer);
     void setFaceDetectorIndex(int _faceDetectorInd);
     void setFaceTrackerIndex(int _faceTrackerInd);
@@ -26,6 +25,7 @@ public:
     bool getVideoCaptureNextFrame();
     void runFaceDetection(QImage &_dstImg, int &_facesNum);
     bool initializeTracker(const int &_selectedFaceInd);
+    void runFaceRecognition(QImage &_dstImg, QString &_faceInfo);
 
 private:
     QString optionsFileName;

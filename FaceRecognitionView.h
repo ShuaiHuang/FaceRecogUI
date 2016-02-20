@@ -32,6 +32,8 @@ private slots:
 
     void on_selectionButton_clicked();
 
+    void on_playButton_clicked();
+
 private:
     Ui::FaceRecognition *ui;
     shared_ptr<FaceRecognitionCtrl> faceRecognitionCtrlPtr;

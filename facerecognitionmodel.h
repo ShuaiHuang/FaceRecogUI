@@ -42,7 +42,6 @@ public:
             const int _faceRecognizerInd = NOT_DEFINED);
 
     void getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognizerPtr);
-    void runFaceRecognition();
     void setFaceTrackerIndex(int _faceTrackerInd);
     void setFaceRecognizerIndex(int _faceRecognizerInd);
     void setFaceDetectorIndex(int _faceDetectorInd);
@@ -50,6 +49,7 @@ public:
     bool getVideoCaptureNextFrame();
     void runFaceDetection(Mat &_dstImg, int &_facesNum);
     bool initializeTracker(const int &_selectedFaceInd);
+    void runFaceRecognition(Mat &_dstImg, string &_faceInfo);
 
 private:
     const string cascadeDetectorFile;
@@ -62,6 +62,13 @@ private:
 
     Ptr<FaceDetector> frontalFaceDetectorPtr;
     Ptr<Integrator> integratorPtr;
+    Rect curIntegratedRect, prevIntegratedRect;
+    void recognizeFace(Mat &_srcFrame,
+        Rect _faceRect,
+        string &_outputName,
+        Ptr<FaceRecognizer> &_faceRecognizer,
+        Ptr<FaceDetector> &_faceDetector);
+    Rect enlargeFaceRect(Mat &_srcFrame, Rect _faceRect);
 };
 
 #endif // FACERECOGNITIONMODEL_H

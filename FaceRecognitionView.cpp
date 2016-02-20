@@ -14,7 +14,6 @@ FaceRecognition::FaceRecognition(QWidget *parent) :
     ui->faceIndComboBox->setEnabled(false);
     ui->selectionButton->setEnabled(false);
     ui->playButton->setEnabled(false);
-    ui->stopButton->setEnabled(false);
 }
 
 FaceRecognition::~FaceRecognition()
@@ -97,7 +96,6 @@ void FaceRecognition::on_selectionButton_clicked()
     if (faceRecognitionCtrlPtr->initializeTracker(selectedFaceInd))
     {
         ui->playButton->setEnabled(true);
-        ui->stopButton->setEnabled(true);
         ui->faceIndComboBox->setEnabled(false);
         ui->nextFrameButton->setEnabled(false);
         ui->selectionButton->setEnabled(false);
@@ -106,5 +104,22 @@ void FaceRecognition::on_selectionButton_clicked()
     else
     {
         QMessageBox::warning(this, "Warning", "Face index error.", QMessageBox::Ok, QMessageBox::NoButton);
+    }
+}
+
+void FaceRecognition::on_playButton_clicked()
+{
+    QImage dstImg;
+    QString faceInfo;
+
+    ui->recogResultTxtBrowser->append("Start to recognize.");
+    ui->playButton->setEnabled(false);
+    while (faceRecognitionCtrlPtr->getVideoCaptureNextFrame())
+    {
+        faceRecognitionCtrlPtr->runFaceRecognition(dstImg, faceInfo);
+        dstImg = dstImg.scaled(340, 260, Qt::KeepAspectRatio);
+        ui->videoDisplayLabel->clear();
+        ui->videoDisplayLabel->setPixmap(QPixmap::fromImage(dstImg));
+        ui->recogResultTxtBrowser->append(faceInfo);
     }
 }

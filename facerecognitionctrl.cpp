@@ -7,9 +7,13 @@ FaceRecognitionCtrl::FaceRecognitionCtrl()
     loadOptions();
 }
 
-void FaceRecognitionCtrl::runFaceRecognization()
+void FaceRecognitionCtrl::runFaceRecognition(QImage &_dstImg, QString &_faceInfo)
 {
-    faceRecognitionModelPtr->runFaceRecognition();
+    Mat dstImg;
+    string faceInfo;
+    faceRecognitionModelPtr->runFaceRecognition(dstImg, faceInfo);
+    cvtMat2QImage(dstImg, _dstImg);
+    _faceInfo = QString::fromStdString(faceInfo);
 }
 
 void FaceRecognitionCtrl::getFaceRecognizer(Ptr<FaceRecognizer> &_faceRecognizer)
