@@ -68,44 +68,44 @@
    <widget class="QComboBox" name="faceIndComboBox">
     <property name="geometry">
      <rect>
-      <x>349</x>
-      <y>283</y>
-      <width>69</width>
-      <height>20</height>
+      <x>190</x>
+      <y>280</y>
+      <width>75</width>
+      <height>23</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="recogButton">
+   <widget class="QPushButton" name="playButton">
     <property name="geometry">
      <rect>
-      <x>424</x>
-      <y>282</y>
+      <x>350</x>
+      <y>280</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Recognize</string>
+     <string>Play</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="stopRecogButton">
+   <widget class="QPushButton" name="stopButton">
     <property name="geometry">
      <rect>
-      <x>505</x>
-      <y>282</y>
+      <x>430</x>
+      <y>280</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Stop Recog</string>
+     <string>Stop</string>
     </property>
    </widget>
    <widget class="QPushButton" name="loadVideoButton">
     <property name="geometry">
      <rect>
-      <x>32</x>
-      <y>282</y>
+      <x>30</x>
+      <y>280</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -118,7 +118,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>282</y>
+      <y>280</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -127,10 +127,28 @@
      <string>&gt;&gt;</string>
     </property>
    </widget>
-   <zorder>layoutWidget</zorder>
-   <zorder>layoutWidget</zorder>
+   <widget class="QPushButton" name="selectionButton">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>280</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Select</string>
+    </property>
+   </widget>
+   <zorder>recogResultTxtBrowser</zorder>
+   <zorder>faceIndComboBox</zorder>
+   <zorder>playButton</zorder>
+   <zorder>stopButton</zorder>
+   <zorder>loadVideoButton</zorder>
+   <zorder>nextFrameButton</zorder>
    <zorder>line</zorder>
    <zorder>videoDisplayLabel</zorder>
+   <zorder>selectionButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

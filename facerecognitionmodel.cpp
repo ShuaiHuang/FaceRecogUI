@@ -10,6 +10,9 @@ FaceRecognitionModel::FaceRecognitionModel(
     setFaceDetectorIndex(_faceDetectorInd);
     setFaceTrackerIndex(_faceTrackerInd);
     setFaceRecognizerIndex(_faceRecognizerInd);
+
+    frontalFaceDetectorPtr = makePtr<CascadeDetector>(cascadeDetectorFile);
+    integratorPtr = makePtr<Integrator>(faceTrackerPtr);
 }
 
 void FaceRecognitionModel::setFaceDetectorIndex(int _faceDetectorInd)
@@ -87,6 +90,7 @@ bool FaceRecognitionModel::getVideoCaptureNextFrame()
     if (!srcImg.empty())
     {
         srcImg.copyTo(dstImg);
+        return true;
     }
     else
     {
@@ -102,5 +106,17 @@ void FaceRecognitionModel::runFaceDetection(Mat &_dstImg, int &_facesNum)
         faceDetectorPtr->visualizeFaceRects(dstImg);
         _dstImg = dstImg;
         _facesNum = faceRectVec.size();
+    }
+}
+
+bool FaceRecognitionModel::initializeTracker(const int &_selectedFaceInd)
+{
+    if (_selectedFaceInd > faceRectVec.size())
+    {
+        return false;
+    }
+    else
+    {
+        return faceTrackerPtr->init(srcImg, faceRectVec[_selectedFaceInd]);
     }
 }

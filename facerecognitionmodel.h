@@ -16,6 +16,7 @@ using namespace face;
 
 #include "facedetector.h"
 #include "cascadedetector.h"
+#include "integrator.h"
 
 #define TRACKER_TLD 0
 #define TRACKER_MIL 1
@@ -48,6 +49,7 @@ public:
     void loadVideo(string _videoFile);
     bool getVideoCaptureNextFrame();
     void runFaceDetection(Mat &_dstImg, int &_facesNum);
+    bool initializeTracker(const int &_selectedFaceInd);
 
 private:
     const string cascadeDetectorFile;
@@ -57,6 +59,9 @@ private:
     VideoCapture videoCapture;
     Mat srcImg, dstImg;
     vector<Rect> faceRectVec;
+
+    Ptr<FaceDetector> frontalFaceDetectorPtr;
+    Ptr<Integrator> integratorPtr;
 };
 
 #endif // FACERECOGNITIONMODEL_H

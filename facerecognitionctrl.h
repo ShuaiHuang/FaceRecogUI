@@ -25,6 +25,7 @@ public:
     void loadVideo(QString _videoFile);
     bool getVideoCaptureNextFrame();
     void runFaceDetection(QImage &_dstImg, int &_facesNum);
+    bool initializeTracker(const int &_selectedFaceInd);
 
 private:
     QString optionsFileName;

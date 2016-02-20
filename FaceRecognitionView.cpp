@@ -12,8 +12,9 @@ FaceRecognition::FaceRecognition(QWidget *parent) :
 
     ui->nextFrameButton->setEnabled(false);
     ui->faceIndComboBox->setEnabled(false);
-    ui->recogButton->setEnabled(false);
-    ui->stopRecogButton->setEnabled(false);
+    ui->selectionButton->setEnabled(false);
+    ui->playButton->setEnabled(false);
+    ui->stopButton->setEnabled(false);
 }
 
 FaceRecognition::~FaceRecognition()
@@ -28,7 +29,7 @@ void FaceRecognition::on_actionQuit_triggered()
 
 void FaceRecognition::on_actionAbout_triggered()
 {
-    QMessageBox::about(this, "About", "Made by Shuai Huang, PAMI Lab");
+    QMessageBox::about(this, "About", "by Shuai Huang, PAMI Lab\n shuaihuang@sjtu.edu.cn\n All copyright reserved.");
 }
 
 void FaceRecognition::on_actionRegister_Face_triggered()
@@ -56,8 +57,7 @@ void FaceRecognition::on_loadVideoButton_clicked()
         emit ui->nextFrameButton->clicked();
 
         ui->nextFrameButton->setEnabled(true);
-        ui->faceIndComboBox->setEnabled(true);
-        ui->recogButton->setEnabled(true);
+        ui->recogResultTxtBrowser->append("Video loaded.");
     }
 }
 
@@ -72,14 +72,39 @@ void FaceRecognition::on_nextFrameButton_clicked()
         dstImg = dstImg.scaled(340, 260, Qt::KeepAspectRatio);
         ui->videoDisplayLabel->setPixmap(QPixmap::fromImage(dstImg));
 
+        ui->faceIndComboBox->setEnabled(false);
         ui->faceIndComboBox->clear();
-        for (int curFaceInd = 0; curFaceInd < facesNum; curFaceInd++)
+        ui->selectionButton->setEnabled(false);
+        if (facesNum > 0)
         {
-            ui->faceIndComboBox->addItem(QString::number(curFaceInd));
+            ui->selectionButton->setEnabled(true);
+            ui->faceIndComboBox->setEnabled(true);
+            for (int curFaceInd = 0; curFaceInd < facesNum; curFaceInd++)
+            {
+                ui->faceIndComboBox->addItem(QString::number(curFaceInd));
+            }
         }
     }
     else
     {
         QMessageBox::warning(this, "Warning", "Video finished.", QMessageBox::Ok, QMessageBox::NoButton);
+    }
+}
+
+void FaceRecognition::on_selectionButton_clicked()
+{
+    int selectedFaceInd = ui->faceIndComboBox->currentIndex();
+    if (faceRecognitionCtrlPtr->initializeTracker(selectedFaceInd))
+    {
+        ui->playButton->setEnabled(true);
+        ui->stopButton->setEnabled(true);
+        ui->faceIndComboBox->setEnabled(false);
+        ui->nextFrameButton->setEnabled(false);
+        ui->selectionButton->setEnabled(false);
+        ui->recogResultTxtBrowser->append("Face selected.");
+    }
+    else
+    {
+        QMessageBox::warning(this, "Warning", "Face index error.", QMessageBox::Ok, QMessageBox::NoButton);
     }
 }

@@ -95,3 +95,8 @@ void FaceRecognitionCtrl::runFaceDetection(QImage &_dstImg, int &_facesNum)
     faceRecognitionModelPtr->runFaceDetection(dstImg, _facesNum);
     cvtMat2QImage(dstImg, _dstImg);
 }
+
+bool FaceRecognitionCtrl::initializeTracker(const int &_selectedFaceInd)
+{
+    return faceRecognitionModelPtr->initializeTracker(_selectedFaceInd);
+}
