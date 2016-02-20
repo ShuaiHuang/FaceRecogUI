@@ -118,8 +118,12 @@ void FaceRecognition::on_playButton_clicked()
     {
         faceRecognitionCtrlPtr->runFaceRecognition(dstImg, faceInfo);
         dstImg = dstImg.scaled(340, 260, Qt::KeepAspectRatio);
+        QCoreApplication::processEvents();
         ui->videoDisplayLabel->clear();
         ui->videoDisplayLabel->setPixmap(QPixmap::fromImage(dstImg));
-        ui->recogResultTxtBrowser->append(faceInfo);
+        if (!faceInfo.isEmpty())
+        {
+            ui->recogResultTxtBrowser->append(faceInfo);
+        }
     }
 }
