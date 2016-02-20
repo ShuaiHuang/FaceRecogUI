@@ -47,16 +47,19 @@ void FaceRegistrationCtrl::registerFace(int _faceInd, int _faceLabel, QString _f
 
 void FaceRegistrationCtrl::updateFaceRecognizer()
 {
-    faceRegistrationModelPtr->updateFaceRecognizer(faceImgVec, faceLabelVec, faceInfoVec);
-    faceRegistrationModelPtr->saveFaceRecognizer();
+    if (!faceImgVec.empty())
+    {
+        faceRegistrationModelPtr->updateFaceRecognizer(faceImgVec, faceLabelVec, faceInfoVec);
+        faceRegistrationModelPtr->saveFaceRecognizer();
+    }
 }
 
 void FaceRegistrationCtrl::drawFaceRects()
 {
     if (!dstImg.empty() && !faceRects.empty())
     {
-        const int rectsNum = faceRects.size();
-        for (int curInd = 0; curInd < rectsNum; curInd++)
+        size_t rectsNum = faceRects.size();
+        for (size_t curInd = 0; curInd < rectsNum; curInd++)
         {
             rectangle(dstImg, faceRects[curInd], Scalar(0, 255, 0), 3);
             putText(

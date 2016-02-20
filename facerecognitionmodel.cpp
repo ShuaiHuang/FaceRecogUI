@@ -68,3 +68,8 @@ void FaceRecognitionModel::runFaceRecognition()
 {
 
 }
+
+void FaceRecognitionModel::loadVideo(string _videoFile)
+{
+    videoCapture.open(_videoFile);
+}

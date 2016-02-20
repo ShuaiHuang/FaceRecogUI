@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QFileDialog>
 
 #include "facerecognitionctrl.h"
 #include "FaceRegistrationView.h"
@@ -23,6 +24,8 @@ private slots:
     void on_actionQuit_triggered();
     void on_actionAbout_triggered();
     void on_actionRegister_Face_triggered();
+
+    void on_loadVideoButton_clicked();
 
 private:
     Ui::FaceRecognition *ui;

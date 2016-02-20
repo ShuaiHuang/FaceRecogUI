@@ -5,7 +5,7 @@ FaceRegistrationModel::FaceRegistrationModel(Ptr<FaceRecognizer> _faceRecognizer
       faceRecognizerFileName(".\\data\\face_recognizer.xml"),
       faceRecognizerPtr(_faceRecognizerPtr)
 {
-    cascadeClassifier.load(classifierFileName);
+    faceDetectorPtr = makePtr<CascadeDetector>(classifierFileName);
 }
 
 void FaceRegistrationModel::updateFaceRecognizer(vector<Mat> &_faceImgVec,
@@ -13,7 +13,7 @@ void FaceRegistrationModel::updateFaceRecognizer(vector<Mat> &_faceImgVec,
         vector<string> _faceInfoVec)
 {
     faceRecognizerPtr->train(_faceImgVec, _faceLabelVec);
-    const int faceRegNum = _faceImgVec.size();
+    int faceRegNum = _faceImgVec.size();
     for (int curFaceInd = 0; curFaceInd < faceRegNum; curFaceInd++)
     {
         if (_faceInfoVec[curFaceInd] != "")
@@ -33,8 +33,7 @@ void FaceRegistrationModel::detectFaces(const Mat &_inputImg, vector<Rect> &_out
     if (!_inputImg.empty())
     {
         _inputImg.copyTo(srcImg);
-        cvtColor(srcImg, srcImg, CV_BGR2GRAY);
-        cascadeClassifier.detectMultiScale(srcImg, faceRects, 1.2, 3, 0 | CV_HAAR_SCALE_IMAGE, Size(30, 30));
+        faceDetectorPtr->runDetection(srcImg, faceRects);
         _outputRects = faceRects;
     }
 }

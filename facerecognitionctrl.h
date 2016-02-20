@@ -22,6 +22,7 @@ public:
     void setFaceRecognizer(int _faceRecognizerInd);
     bool loadOptions();
     bool saveOptions(int _faceDetectorInd, int _faceTrackerInd, int _faceRecognizerInd);
+    void loadVideo(QString _videoFile);
 
 private:
     QString optionsFileName;

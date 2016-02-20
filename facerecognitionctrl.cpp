@@ -78,3 +78,8 @@ bool FaceRecognitionCtrl::saveOptions(int _faceDetectorInd, int _faceTrackerInd,
     optionsFile.close();
     return true;
 }
+
+void FaceRecognitionCtrl::loadVideo(QString _videoFile)
+{
+    faceRecognitionModelPtr->loadVideo(_videoFile.toStdString());
+}

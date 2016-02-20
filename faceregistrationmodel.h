@@ -13,6 +13,9 @@ using namespace std;
 using namespace cv;
 using namespace face;
 
+#include "facedetector.h"
+#include "cascadedetector.h"
+
 class FaceRegistrationModel
 {
 public:
@@ -22,7 +25,7 @@ public:
     void detectFaces(const Mat &_inputImg, vector<Rect> &_outputRects);
 
 private:
-    CascadeClassifier cascadeClassifier;
+    Ptr<FaceDetector> faceDetectorPtr;
     Ptr<FaceRecognizer> faceRecognizerPtr;
     string classifierFileName;
     string faceRecognizerFileName;

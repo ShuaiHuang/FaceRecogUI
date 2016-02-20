@@ -41,10 +41,12 @@ public:
     void setFaceTrackerIndex(int _faceTrackerInd);
     void setFaceRecognizerIndex(int _faceRecognizerInd);
     void setFaceDetectorIndex(int _faceDetectorInd);
+    void loadVideo(string _videoFile);
 
 private:
     Ptr<Tracker> faceTrackerPtr;
     Ptr<FaceRecognizer> faceRecognizerPtr;
+    VideoCapture videoCapture;
 };
 
 #endif // FACERECOGNITIONMODEL_H

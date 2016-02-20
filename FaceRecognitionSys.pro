@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     facerecognitionmodel.cpp \
     faceregistrationctrl.cpp \
     faceregistrationmodel.cpp \
-    FaceRegistrationView.cpp
+    FaceRegistrationView.cpp \
+    facedetector.cpp \
+    cascadedetector.cpp
 
 HEADERS  += \
     FaceRecognitionView.h \
@@ -29,7 +31,9 @@ HEADERS  += \
     facerecognitionmodel.h \
     faceregistrationctrl.h \
     faceregistrationmodel.h \
-    FaceRegistrationView.h
+    FaceRegistrationView.h \
+    facedetector.h \
+    cascadedetector.h
 
 FORMS    += facerecognition.ui \
     faceregistration.ui

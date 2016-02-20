@@ -9,6 +9,11 @@ FaceRecognition::FaceRecognition(QWidget *parent) :
     ui->setupUi(this);
     faceRecognitionCtrlPtr = make_shared<FaceRecognitionCtrl>();
     faceRecognitionCtrlPtr->loadOptions();
+
+    ui->nextFrameButton->setEnabled(false);
+    ui->faceIndComboBox->setEnabled(false);
+    ui->recogButton->setEnabled(false);
+    ui->stopRecogButton->setEnabled(false);
 }
 
 FaceRecognition::~FaceRecognition()
@@ -40,4 +45,13 @@ void FaceRecognition::on_actionRegister_Face_triggered()
     }
     emit sendFaceRecognitionCtrlPtr(faceRecognitionCtrlPtr);
     faceRegistrationPtr->show();
+}
+
+void FaceRecognition::on_loadVideoButton_clicked()
+{
+    QString videoFile = QFileDialog::getOpenFileName(this, "Open Video File", ".", "Video (*.avi)");
+    if (!videoFile.isEmpty())
+    {
+        faceRecognitionCtrlPtr->loadVideo(videoFile);
+    }
 }
