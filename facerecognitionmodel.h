@@ -16,6 +16,7 @@ using namespace face;
 
 #include "facedetector.h"
 #include "cascadedetector.h"
+#include "npddetector.h"
 #include "integrator.h"
 
 #define TRACKER_TLD 0
@@ -52,7 +53,7 @@ public:
     void runFaceRecognition(Mat &_dstImg, string &_faceInfo);
 
 private:
-    const string cascadeDetectorFile;
+    string detectorModelFile, frontalDetectorModelFile;
     Ptr<FaceDetector> faceDetectorPtr;
     Ptr<Tracker> faceTrackerPtr;
     Ptr<FaceRecognizer> faceRecognizerPtr;

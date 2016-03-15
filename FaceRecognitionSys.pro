@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     FaceRegistrationView.cpp \
     facedetector.cpp \
     cascadedetector.cpp \
-    integrator.cpp
+    integrator.cpp \
+    npddetector.cpp \
+    npdmodel.cpp
 
 HEADERS  += \
     FaceRecognitionView.h \
@@ -35,7 +37,9 @@ HEADERS  += \
     FaceRegistrationView.h \
     facedetector.h \
     cascadedetector.h \
-    integrator.h
+    integrator.h \
+    npddetector.h \
+    npdmodel.h
 
 FORMS    += facerecognition.ui \
     faceregistration.ui

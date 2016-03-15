@@ -5,13 +5,13 @@ FaceRecognitionModel::FaceRecognitionModel(
         const int _faceTrackerInd,
         const int _faceRecognizerInd
         )
-    : cascadeDetectorFile(".\\data\\haarcascade_frontalface_default.xml")
+    : frontalDetectorModelFile(".\\data\\haarcascade_frontalface_default.xml")
 {
     setFaceDetectorIndex(_faceDetectorInd);
     setFaceTrackerIndex(_faceTrackerInd);
     setFaceRecognizerIndex(_faceRecognizerInd);
 
-    frontalFaceDetectorPtr = makePtr<CascadeDetector>(cascadeDetectorFile);
+    frontalFaceDetectorPtr = makePtr<CascadeDetector>(frontalDetectorModelFile);
     integratorPtr = makePtr<Integrator>(faceTrackerPtr);
 }
 
@@ -20,10 +20,16 @@ void FaceRecognitionModel::setFaceDetectorIndex(int _faceDetectorInd)
     switch (_faceDetectorInd)
     {
     case DETECTOR_CASCADE:
-        faceDetectorPtr = makePtr<CascadeDetector>(cascadeDetectorFile);
+        detectorModelFile = ".\\data\\haarcascade_frontalface_default.xml";
+        faceDetectorPtr = makePtr<CascadeDetector>(detectorModelFile);
+        break;
+    case DETECTOR_NPD:
+        detectorModelFile = ".\\data\\npdModel_frontal.xml";
+        faceDetectorPtr = makePtr<NpdDetector>(detectorModelFile);
         break;
     default:
-        faceDetectorPtr = makePtr<CascadeDetector>(cascadeDetectorFile);
+        detectorModelFile = ".\\data\\haarcascade_frontalface_default.xml";
+        faceDetectorPtr = makePtr<CascadeDetector>(detectorModelFile);
     }
 
 }
