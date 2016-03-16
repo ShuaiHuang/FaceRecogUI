@@ -126,4 +126,5 @@ void FaceRecognition::on_playButton_clicked()
             ui->recogResultTxtBrowser->append(faceInfo);
         }
     }
+    ui->recogResultTxtBrowser->append("Recognition ended.");
 }

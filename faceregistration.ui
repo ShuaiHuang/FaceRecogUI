@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Face Registration</string>
   </property>
   <widget class="QLabel" name="sourceLabel">
    <property name="geometry">
